@@ -6,13 +6,6 @@
     let isDrawing = true;
 
     let timer;
-    // var POINTS = [
-    //     {x: 0, y: 0}, {x:1, y:0}, 
-    //     {x: 0, y: 1}, {x: 2, y: 0}, 
-    //     {x: 0, y: 2}, {x: 1, y: 2}, 
-    //     {x: 2, y: 1}, {x:2, y:2},
-    //     {x: 3, y: 2}, {x:2, y:3},
-    // ]
     var POINTS;
     const highlightedCells = new Set();
 
@@ -88,11 +81,10 @@
                         timer = setTimeout(function() {
                             if (isDrawing) {
                                 CTX.fillStyle = `rgb(${fillColorPoints.r}, ${fillColorPoints.g}, ${fillColorPoints.b})`;
-                                CTX.fillRect(NEW_POINT_X+offsetX, NEW_POINT_Y+offsetY, 1, 1)
-                                CTX.fillRect(NEW_POINT_X+offsetX, -NEW_POINT_Y+offsetY, 1, 1)
-                                CTX.fillRect(-NEW_POINT_X+offsetX, NEW_POINT_Y+offsetY, 1, 1)
-                                CTX.fillRect(-NEW_POINT_X+offsetX, -NEW_POINT_Y+offsetY, 1, 1)
-                                // CTX.fillRect(NEW_POINT_Y+offset, NEW_POINT_X+offset, 1, 1)
+                                CTX.fillRect(NEW_POINT_X+offsetX, NEW_POINT_Y+offsetY, 1, 1);
+                                CTX.fillRect(NEW_POINT_X+offsetX, -NEW_POINT_Y+offsetY, 1, 1);
+                                CTX.fillRect(-NEW_POINT_X+offsetX, NEW_POINT_Y+offsetY, 1, 1);
+                                CTX.fillRect(-NEW_POINT_X+offsetX, -NEW_POINT_Y+offsetY, 1, 1);
                             }
                         }, 20);
                     })(NEW_POINT_X, NEW_POINT_Y);
@@ -102,8 +94,8 @@
     }
 
     var drumMachine = document.getElementById("drumMachine");
-    var nRows = 9;
-    var nCols = 9;
+    var nRows = 15;
+    var nCols = 15;
     for (let i = 0; i < nRows; i++) {
         var row = document.createElement("tr");
         for (let j = 0; j < nCols; j++) {
@@ -115,46 +107,24 @@
                 const row = cell.parentElement;
                 const xIndex = row.rowIndex;
                 const yIndex = cellE.cellIndex;
-                isDrawing = false;  // Set the flag to false to stop the recursion
-                clearTimeout(timer);  // Optional: Clear the last setTimeout
-                const offset = 100; 
+                isDrawing = false;
+                clearTimeout(timer);
                 if (cell.classList.contains("activated")) {
-                    highlightedCells.add(yIndex + "," + xIndex)
+                    highlightedCells.add(yIndex + "," + xIndex);
                 }
                 else {
-                    // init_variables()
-                    // isDrawing = false;  // Set the flag to false to stop the recursion
-                    // clearTimeout(timer);  // Optional: Clear the last setTimeout
-                    highlightedCells.delete(yIndex + "," + xIndex)
-                    // (function() {
-                    //     // console.log("deactivated")
-                    //     setTimeout(function() {
-                    //         CTX.fillStyle = "blue";
-                    //         CTX.fillRect(0, 0, CANVAS.width, CANVAS.height)
-                    //     }, 20);
-                    // })();
-                    // isDrawing = true;
-                    // draw(5);
-                    // draw(-1);
-                    // (function() {
-                        // setTimeout(function() {
-                        //     CTX.fillStyle = "green";
-                        //     CTX.fillRect(0, 0, CANVAS.width, CANVAS.height)
-                        // }, 20);
-                        // })();
-                        // draw(5);
-                    }
-                    (function() {
-                        init_variables()
-                        console.log(POINTS)
-                        setTimeout(function() {
-                            CTX.fillStyle = `rgb(${fillColorBackground.r}, ${fillColorBackground.g}, ${fillColorBackground.b})`;
-                            CTX.fillRect(0, 0, CANVAS.width, CANVAS.height)
-                        }, 20);
-                    })();
-                    isDrawing = true;
-                    rec_fun(4, 0, 0);
-                });
+                    highlightedCells.delete(yIndex + "," + xIndex);
+                }
+                (function() {
+                    init_variables();
+                    setTimeout(function() {
+                        CTX.fillStyle = `rgb(${fillColorBackground.r}, ${fillColorBackground.g}, ${fillColorBackground.b})`;
+                        CTX.fillRect(0, 0, CANVAS.width, CANVAS.height);
+                    }, 20);
+                })();
+                isDrawing = true;
+                rec_fun(4, 0, 0);
+            });
             row.appendChild(cell);
         }
         drumMachine.appendChild(row);
