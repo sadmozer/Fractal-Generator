@@ -1,14 +1,101 @@
-<html>
-    <head>
-        <title>Fractals</title>
-        <link rel="stylesheet" href="style.css" type="text/css">
-    </head>
-    <body>  
-        <div class="container">
-            <table id="drumMachine"></table>
-            <canvas id="canvas"></canvas>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fractal Pattern Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button class="toggle-sidebar" id="toggleSidebar">☰</button>
+    
+    <div class="container">
+        <div class="sidebar hidden" id="sidebar">
+            <h1>🎨 Fractal Generator</h1>
+            
+            <h2>Pattern Grid</h2>
+            <div class="grid-info">
+                <span>Size: <span id="gridSizeValue">3x3</span></span>
+                <p class="hint">Drag edges to resize</p>
+            </div>
+            <div class="grid-container">
+                <table id="drumMachine"></table>
+            </div>
+            <div class="preset-grid">
+                <button id="randomBtn" class="grid-btn">🎲 Random Pattern</button>
+                <button id="clearBtn" class="grid-btn">🗑️ Clear Grid</button>
+                <button id="savePatternBtn" class="grid-btn">💾 Save Pattern</button>
+            </div>
+
+            <h2>Autoplay</h2>
+            <div class="controls">
+                <div class="control-group">
+                    <label for="autoplayMode">Mode</label>
+                    <select id="autoplayMode">
+                        <option value="random">Random Patterns</option>
+                        <option value="presets">Cycle Presets</option>
+                        <option value="custom">Cycle Custom</option>
+                    </select>
+                </div>
+                <button id="autoplayBtn" class="autoplay-btn playing">⏸ Stop Autoplay</button>
+
+                <div class="control-group">
+                    <label for="autoplaySpeed">Interval (seconds): <span id="autoplaySpeedValue">3</span></label>
+                    <input type="range" id="autoplaySpeed" min="0" max="10" value="3" step="0.5">
+                </div>
+            </div>
+
+            <h2>3x3 Presets</h2>
+            <div class="preset-grid">
+                <button class="preset-btn" data-preset="cross">✚ Cross</button>
+                <button class="preset-btn" data-preset="doublediagonal">✕ Double Diagonal</button>
+                <button class="preset-btn" data-preset="sierpinski-carpet">■ Sierpinski Carpet</button>
+                <button class="preset-btn" data-preset="diagonal">⟋ Diagonal</button>
+                <button class="preset-btn" data-preset="stairs">◢ Stairs</button>
+            </div>
+            
+            <h2>Custom Patterns</h2>
+            <div id="customPatternsContainer" class="preset-grid">
+                <p class="hint" id="noCustomPatterns">No custom patterns saved yet</p>
+            </div>
+            
+            <h2>Controls</h2>
+            <div class="controls">
+                <div class="control-group">
+                    <label for="depthSlider">Depth: <span id="depthValue">6</span></label>
+                    <input type="range" id="depthSlider" min="1" max="6" value="6">
+                </div>
+                
+                <div class="control-group">
+                    <label for="speedSelect">Animation Speed</label>
+                    <select id="speedSelect">
+                        <option value="slow">Slow</option>
+                        <option value="medium">Medium</option>
+                        <option value="fast">Fast</option>
+                        <option value="auto" selected>Auto</option>
+                    </select>
+                </div>
+                
+                <div class="control-group">
+                    <label>Colors</label>
+                    <div class="color-controls">
+                        <div class="color-picker-group">
+                            <label for="bgColorPicker">Background</label>
+                            <input type="color" id="bgColorPicker" value="#000000">
+                        </div>
+                        <div class="color-picker-group">
+                            <label for="patternColorPicker">Pattern</label>
+                            <input type="color" id="patternColorPicker" value="#4a9eff">
+                        </div>
+                        <button id="randomColorsBtn" class="small-btn">🎲 Random</button>
+                    </div>
+                </div>
+            </div>
         </div>
-        <script type="text/javascript" src="app2.js"></script>
-        <!-- <script type="text/javascript" src="app3.js"></script> -->
-    </body>
+        
+        <canvas id="canvas"></canvas>
+    </div>
+
+    <script src="app.js"></script>
+</body>
 </html>
