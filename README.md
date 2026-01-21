@@ -1,1 +1,2 @@
+# Fractal-Generator
 [Link to the Site](https://sadmozer.github.io/Fractal-Generator/)
